@@ -1,33 +1,34 @@
-//console.log("hello")
+//define angle and radius
+let angle = 0;
+let rad = 0;
 
-let y = 0;
-let speed = 4;
-
-function setup(){
-createCanvas(windowWidth,windowHeight)
-background (255, 246, 161)
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(240, 218, 224);
 }
 
-function draw(){
-  let diameter = 40;
-  for(let i = diameter/2; i < width; i+=diameter) {
-//red value
-  let r = map(mouseX, 0, width, 0, 255)
-  
+function draw() {
   //green value
-  let g = map(mouseY, 0, height, 0, 255)
-  
-  let size = map(mouseX*mouseY, 0, width*height, 2, 40)
-  
-  fill(r, g, 150)
-  noStroke()    
-    ellipse(i, y, 20);
+  let g = map(mouseX, 0, width, 100, 255)
+  //blue value
+  let b = map(mouseY, 150, height, 0, 200)
+  translate(width/2, height/2);
+  noStroke();
+  fill(255, g, b);
+  let x = rad * cos(angle);
+  let y = rad * sin(angle);
+  circle(x, y, 20);
+
+  angle += 0.05;
+  rad += 0.2;
+
+  //clear screen when spiral fills window
+    let maxRad = dist(0, 0, width/2, height/2);
+  if (rad > maxRad) {
+    background(240, 218, 224);
+    rad = 0;
+    angle = 0;
   }
-  
-  if(y > height + diameter){
-    y = 0;
-  }
-  y+=speed;
 }
 
 function windowResized() {
