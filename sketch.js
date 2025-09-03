@@ -1,6 +1,9 @@
-let speed = 5;
+let speed = 4;
 let diameter = 50;
 let x = diameter/2;
+// flowere coordinates
+let fx
+let fy
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -11,20 +14,26 @@ function setup() {
 function draw() {
   noStroke();
   //red value
-  let r = map(mouseX, 0, width, 70, 123);
+  let r = map(mouseX, 0, width, 70, 200);
   //blue value
-  let b = map(mouseY, 150, height, 0, 111);
+  let b = map(mouseY, 150, height, 0, 255);
   fill(r, 128, b, 10);
   circle(x, height/8, 20);
 
   if (x >= width - diameter/2 || x < diameter/2) {
     speed = -speed;
+  //random location
+  fx = random(0, width);
+  fy = random(height/8 + diameter, height)
     drawFlower()
   }
   x += speed;
 }
 
+//draw flower when mouse pressed
 function mousePressed() {
+  fx = mouseX;
+  fy = mouseY;
   drawFlower();
 }
 
@@ -33,11 +42,9 @@ function mousePressed() {
     //set flower size and number of petals
   let petalAngle = TWO_PI/7;
   let flowerSize = random(80, 200)
-  //random location
-  let x = random(0, width);
-  let y = random(height/8 + diameter, height)
+
   push();
-  translate(x, y);
+  translate(fx, fy);
   
   fill(255, random(0, 255), random(0, 255), 99);
   for (let i = 0; i < 7; i++) {
