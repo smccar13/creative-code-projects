@@ -14,7 +14,7 @@ function setup() {
 function draw() {
   noStroke();
   //red value
-  let r = map(mouseX, 0, width, 70, 200);
+  let r = map(mouseX, 0, width, 0, 255);
   //blue value
   let b = map(mouseY, 150, height, 0, 255);
   fill(r, 128, b, 10);
