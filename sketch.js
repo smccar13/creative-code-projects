@@ -1,21 +1,41 @@
-//define angle and radius
-let angle = 0;
-let rad = 0;
+let speed = 10;
+let diameter = 50;
+let x = diameter/2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(195, 247, 148);
+    background(195, 247, 148);
+
 }
- 
-// Draw flower each time mouse is clicked
+
+function draw() {
+  noStroke();
+  //red value
+  let r = map(mouseX, 0, width, 70, 123);
+  //blue value
+  let b = map(mouseY, 150, height, 0, 111);
+  fill(r, 128, b, 10);
+  circle(x, height/8, 20);
+
+  if (x >= width - diameter/2 || x < diameter/2) {
+    speed = -speed;
+    drawFlower()
+  }
+  x += speed;
+}
+
 function mousePressed() {
-//set flower size and number of petals
+  drawFlower();
+}
+
+//draw flower in random location
+ function drawFlower() {
+    //set flower size and number of petals
   let petalAngle = TWO_PI/7;
   let flowerSize = random(80, 200)
-//random location
+  //random location
   let x = random(0, width);
-  let y = random(0, height);
-
+  let y = random(height/8 + diameter, height)
   push();
   translate(x, y);
   
@@ -30,35 +50,8 @@ function mousePressed() {
   circle(0, 0, flowerSize/3.5);
 
   pop();
-}
-
-function draw() {
-  noStroke();
-  //red value
-  let r = map(mouseX, 0, width, 70, 123);
-  //blue value
-  let b = map(mouseY, 150, height, 0, 111);
-  push();
-  translate(width/2, height/2);
-  fill(r, 128, b, 50);
-  let x = rad * cos(angle);
-  let y = rad * sin(angle);
-  circle(x, y, 20);
-
-
-  angle += 0.05;
-  rad += 0.2;
-
-  //clear screen when spiral fills window
-    let maxRad = dist(0, 0, width/2, height/2);
-  if (rad > maxRad) {
-    background(195, 247, 148);
-    rad = 0;
-    angle = 0;
   }
-  pop();
-}
-
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-}
+  //clear screen when key is pressed
+  function keyPressed() {
+    background(195, 247, 148)
+  }
