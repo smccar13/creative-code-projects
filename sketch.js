@@ -1,4 +1,4 @@
-let speed = 10;
+let speed = 5;
 let diameter = 50;
 let x = diameter/2;
 
