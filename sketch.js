@@ -1,9 +1,9 @@
-let speed = 4;
+let speed = 6;
 let diameter = 50;
 let x = diameter/2;
-// flowere coordinates
-let fx
-let fy
+// flower coordinates
+let fx;
+let fy;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,7 +25,7 @@ function draw() {
   //random location
   fx = random(0, width);
   fy = random(height/8 + diameter, height)
-    drawFlower()
+    drawFlower(random(60, 200), TWO_PI/7)
   }
   x += speed;
 }
@@ -34,22 +34,18 @@ function draw() {
 function mousePressed() {
   fx = mouseX;
   fy = mouseY;
-  drawFlower();
+  drawFlower(random(80, 200), TWO_PI/7);
 }
 
 //draw flower in random location
- function drawFlower() {
-    //set flower size and number of petals
-  let petalAngle = TWO_PI/7;
-  let flowerSize = random(80, 200)
-
+ function drawFlower(flowerSize, petalNumber) {
   push();
   translate(fx, fy);
   
   fill(255, random(0, 255), random(0, 255), 99);
   for (let i = 0; i < 7; i++) {
     ellipse(0, 0, flowerSize, flowerSize/4);
-    rotate(petalAngle);
+    rotate(petalNumber);
   }
 
   // flower center
