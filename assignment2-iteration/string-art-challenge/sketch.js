@@ -1,12 +1,11 @@
 function setup() {
   createCanvas(400, 400);
   background(255)
-
-  let stepSize = width/16;
+  let margin = width/20
+  let lineSpacing = (width-margin)/7;
   
-  for(i = 0; i < 14; i++){
-    let shade = map(i, 0, 14, 0, 255)
-    fill(shade)
-    rect(stepSize+stepSize*i, 350-stepSize*i, stepSize, stepSize+stepSize*i);
+  for(i = 0; i < 8; i++){
+  strokeWeight(4)
+  line(margin, i*lineSpacing, margin+(i*lineSpacing), height-margin)
   }
 }
