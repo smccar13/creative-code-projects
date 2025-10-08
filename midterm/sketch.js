@@ -26,7 +26,7 @@ function draw() {
   for (let i = fishies.length - 1; i >= 0; i--) {
     let f = fishies[i];
     f.update(brightness);
-    if (f.onScreen == false) {
+    if (!f.onScreen) {
       fishies.splice(i, 1);
       fishies.push(new Fish());
     }
@@ -39,14 +39,18 @@ function draw() {
     for (let j = i + 1; j < fishies.length; j++) {
       let f1 = fishies[i];
       let f2 = fishies[j];
+      let newColor;
       let d = dist(f1.pos.x, f1.pos.y, f2.pos.x, f2.pos.y);
-      let touchDist = (f1.size.x + f2.size.x) / 2;
-      if (d < touchDist && f1.size.x < f2.size.x && f1.collided == false) {
-        f1.color = f2.color;
+      let minDistX = (f1.size.x + f2.size.x) / 2;
+      let minDistY = (f1.size.y + f2.size.y) / 2;
+      if ((d < minDistX || d < minDistY) && f1.size.x < f2.size.x && !f1.collided) {
+        newColor = lerpColor(f1.color, f2.color, 0.5);
+        f1.color = newColor;
         bubbleGroups.push(new bubbleGroup(f1.pos.x, f1.pos.y));
         f1.collided = true;
-      } else if (d < touchDist && f2.size.x < f1.size.x && !f2.collided) {
-        f2.color = f1.color;
+      } else if ((d < minDistX || d < minDistY) && f2.size.x < f1.size.x && !f2.collided) {
+        newColor = lerpColor(f1.color, f2.color, 0.5);
+        f2.color = newColor;
         bubbleGroups.push(new bubbleGroup(f2.pos.x, f2.pos.y));
         f2.collided = true;
       }
@@ -56,7 +60,7 @@ function draw() {
   for (let i = 0; i < bubbleGroups.length; i++) {
     let bg = bubbleGroups[i];
     bg.update();
-    if (bg.alive == false) {
+    if (!bg.alive) {
       bubbleGroups.splice(i, 1);
       i--;
     }
@@ -74,7 +78,8 @@ class Fish {
     this.size = createVector(this.dimensions.x*this.scale,             this.dimensions.y*this.scale) 
     this.maxWidth = this.dimensions.x * maxScale 
     this.maxHeight = this.dimensions.y * maxScale 
-    this.color = color(random(360), random(80,100), 100); this.vel = random(0.5, 4); 
+    this.color = color(random(360), random(80,100), 100);
+    this.vel = random(0.5, 4); 
     this.goRight = random([true, false]);
 
     if (this.goRight) {
