@@ -13,14 +13,14 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(HSB)
   imageMode(CENTER);
-  let numFish = height/25;
+  let numFish = height/22;
   for (let i = 0; i < numFish; i++) {
     let f = new Fish();
     fishies.push(f);
   }
 }
 function draw() {
-  let brightness = map(sin(frameCount * 0.007), -1, 1, 20, 100);
+  let brightness = map(sin(frameCount * 0.002), -1, 1, 20, 100);
   background(190, 50, brightness);
 
   for (let i = fishies.length - 1; i >= 0; i--) {
@@ -44,12 +44,12 @@ function draw() {
       let minDistX = (f1.size.x + f2.size.x) / 2;
       let minDistY = (f1.size.y + f2.size.y) / 2;
       if ((d < minDistX || d < minDistY) && f1.size.x < f2.size.x && !f1.collided) {
-        newColor = lerpColor(f1.color, f2.color, 0.5);
+        newColor = lerpColor(f1.color, f2.color, 0.75);
         f1.color = newColor;
         bubbleGroups.push(new bubbleGroup(f1.pos.x, f1.pos.y));
         f1.collided = true;
       } else if ((d < minDistX || d < minDistY) && f2.size.x < f1.size.x && !f2.collided) {
-        newColor = lerpColor(f1.color, f2.color, 0.5);
+        newColor = lerpColor(f2.color, f1.color, 0.75);
         f2.color = newColor;
         bubbleGroups.push(new bubbleGroup(f2.pos.x, f2.pos.y));
         f2.collided = true;
