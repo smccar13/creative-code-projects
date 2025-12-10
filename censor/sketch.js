@@ -39,32 +39,7 @@ Will come when it will come."
 ― Franz Kafka`
 );
   quoteSelect.option("Maya Angelou",
-  `“You may write me down in history
-With your bitter, twisted lies,
-You may trod me in the very dirt
-But still, like dust, I'll rise.
-
-Does my sassiness upset you?
-Why are you beset with gloom?
-’Cause I walk like I've got oil wells
-Pumping in my living room.
-
-Just like moons and like suns,
-With the certainty of tides,
-Just like hopes springing high,
-Still I'll rise.
-
-Did you want to see me broken?
-Bowed head and lowered eyes?
-Shoulders falling down like teardrops,
-Weakened by my soulful cries?
-
-Does my haughtiness offend you?
-Don't you take it awful hard
-’Cause I laugh like I've got gold mines
-Diggin’ in my own backyard.
-
-You may shoot me with your words,
+  `“...You may shoot me with your words,
 You may cut me with your eyes,
 You may kill me with your hatefulness,
 But still, like air, I’ll rise.
@@ -143,7 +118,7 @@ function draw() {
   text("Original:", 20, 60);
   text("Censored:", width / 2 + 20, 60);
 
-  textSize(18);
+  textSize(22);
   fill(70, 55, 40);
 
   text(original, 20, 100, width / 2 - 40, height - 120);
