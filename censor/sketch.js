@@ -118,7 +118,7 @@ function draw() {
   text("Original:", 20, 60);
   text("Censored:", width / 2 + 20, 60);
 
-  textSize(22);
+  textSize(30);
   fill(70, 55, 40);
 
   text(original, 20, 100, width / 2 - 40, height - 120);
